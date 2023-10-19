@@ -1,3 +1,20 @@
+#why dplyr? it makes it easier
+#to manipulate tables
+
+#tidyr helps you convert
+#between different data formats,
+#which can help with plotting
+#and analysis
+
+#they are more transparent
+#than base R functions (stuff
+#that automatically comes with
+#R)
+
+#set-up: install the tidyverse
+#package that has dplyr and tidyr
+install.packages("tidyverse")
+
 #Learning dplyr and Tidyr: select, filter, and pipes
 library(tidyverse)
 surveys <- read_csv("data/portal_data_joined.csv")
