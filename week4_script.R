@@ -1,21 +1,20 @@
-#why dplyr? it makes it easier
-#to manipulate tables
+#why dplyr? it makes it easier to 
+#manipulate tables
 
-#tidyr helps you convert
-#between different data formats,
-#which can help with plotting
+#tidyr helps you convert between different 
+#data formats, which can help with plotting
 #and analysis
 
-#they are more transparent
-#than base R functions (stuff
-#that automatically comes with
-#R)
+#they are more transparent than base R 
+#functions (stuff that automatically 
+#comes with R)
 
-#set-up: install the tidyverse
-#package that has dplyr and tidyr
+#set-up: install the tidyverse package 
+#that has dplyr and tidyr
 install.packages("tidyverse")
 
-#Learning dplyr and Tidyr: select, filter, and pipes
+#Learning dplyr and Tidyr: 
+#select, filter, and pipes
 library(tidyverse)
 surveys <- read_csv("data/portal_data_joined.csv")
 
@@ -23,6 +22,9 @@ surveys <- read_csv("data/portal_data_joined.csv")
 #select columns
 month_day_year <- select(surveys, month, day, year)
 genus_species_taxa <- select(???)
+
+#no ids
+surveys_no_ids <- select(surveys, -c(plot_id, record_id, species_id))
 
 #filtering by equals (number)
 surveys_1981 <- filter(surveys, year == 1981)
@@ -38,7 +40,9 @@ identical(surveys_rodent_bird, surveys_rodent_bird_2)
 
 #filtering by range
 filter(surveys, year %in% c(1981:1983))
-#why shouldn't you do filter(surveys, year == c(1981, 1982, 1983))
+#why shouldn't you do: 
+#filter(surveys, year == c(1981, 1982, 1983))
+#??
 
 #filtering by multiple conditions
 bigfoot_with_weight <- filter(surveys, hindfoot_length > 40 | !is.na(weight))
@@ -51,8 +55,9 @@ control_ordii <- filter(surveys, species == "ordii" ??? plot_type == "Control")
 #multi-step process
 small_animals <- filter(surveys, weight < 5)
 
-#this is slightly dangerous because you have to remember to select from 
-#small_animals, not surveys in the next step
+#this is slightly dangerous because you have 
+#to remember to select from small_animals, 
+#not surveys in the next step
 small_animal_ids <- select(small_animals, record_id, plot_id, species_id)
 
 #same process, using nested functions
