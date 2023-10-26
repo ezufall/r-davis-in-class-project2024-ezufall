@@ -17,14 +17,20 @@ install.packages("tidyverse")
 #select, filter, and pipes
 library(tidyverse)
 surveys <- read_csv("data/portal_data_joined.csv")
-
-
+#surveysdot uses base r, which creates a data frame
+#surveys uses the tidyverse function, which creates
+#a tibble, which is a special kind of data frame
+#surveysdot <- read.csv("data/portal_data_joined.csv")
+class(surveys)
+#class(surveysdot)
 #select columns
 month_day_year <- select(surveys, month, day, year)
-genus_species_taxa <- select(???)
+genus_species_taxa <- select(surveys, genus, 
+                             species, taxa)
 
 #no ids
-surveys_no_ids <- select(surveys, -c(plot_id, record_id, species_id))
+surveys_no_ids <- select(surveys, -c(plot_id, 
+                    record_id, species_id))
 
 #filtering by equals (number)
 surveys_1981 <- filter(surveys, year == 1981)
@@ -32,9 +38,11 @@ surveys_1981 <- filter(surveys, year == 1981)
 #filtering by equals (string)
 surveys_neotoma <- filter(surveys, genus == "Neotoma")
 
-surveys_rodent_bird <- filter(surveys, taxa ????)
+surveys_rodent_bird <- filter(surveys, 
+      taxa == "Rodent" | taxa == "Bird" | taxa == "Fish")
 #can we think of another way?
-surveys_rodent_bird_2 <- filter(surveys, taxa ????)
+surveys_rodent_bird_2 <- filter(surveys, 
+                taxa %in% c("Rodent", "Bird"))
 
 identical(surveys_rodent_bird, surveys_rodent_bird_2)
 
@@ -45,7 +53,7 @@ filter(surveys, year %in% c(1981:1983))
 #??
 
 #filtering by multiple conditions
-bigfoot_with_weight <- filter(surveys, hindfoot_length > 40 | !is.na(weight))
+bigfoot_with_weight <- filter(surveys, hindfoot_length > 40 & !is.na(weight))
 
 #ord's kangaroo rats who were in the control plot
 control_ordii <- filter(surveys, species == "ordii" ??? plot_type == "Control")
@@ -58,7 +66,8 @@ small_animals <- filter(surveys, weight < 5)
 #this is slightly dangerous because you have 
 #to remember to select from small_animals, 
 #not surveys in the next step
-small_animal_ids <- select(small_animals, record_id, plot_id, species_id)
+small_animal_ids <- select(small_animals, 
+                           record_id, plot_id, species_id)
 
 #same process, using nested functions
 small_animal_ids <- select(filter(surveys, weight < 5), record_id, plot_id, species_id)
@@ -69,8 +78,9 @@ small_animal_ids <- select(filter(surveys, weight < 5), record_id, plot_id, spec
 small_animal_ids <- filter(surveys, weight < 5) %>% select(record_id, plot_id, species_id)
 
 #same as
-small_animal_ids <- surveys %>% filter(weight < 5) %>% select(record_id, 
-                                                              plot_id, species_id)
+small_animal_ids <- surveys %>% 
+  filter(.,weight < 5) %>% select(.,record_id, 
+             plot_id, species_id)
 
 #how to do line breaks with pipes
 surveys %>% filter(month==1)
