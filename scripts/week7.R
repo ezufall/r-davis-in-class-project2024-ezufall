@@ -17,6 +17,11 @@ ggplot(diamonds, aes(x= carat, y= price)) +
 
 #Remember from Part 1 how we iterate? 
 #I've added transparency and color
+
+#all-over color
+ggplot(diamonds, aes(x= carat, y= price)) +
+  geom_point(color="blue")
+#color by variable
 ggplot(diamonds, aes(x= carat, y= price, color=clarity)) +
   geom_point(alpha = 0.2)
 
@@ -69,7 +74,7 @@ ggplot(diamonds, aes(x= carat, y= price, color=clarity)) +
 #From the ggthemes package:
 library(ggthemes)
 ggplot(diamonds, aes(x= carat, y= price, color=clarity)) +
-  geom_point(alpha = 0.2) + theme_classic() + 
+  geom_point(alpha = 1) + theme_classic() + 
   ggtitle("Price by Diamond Quality") + ylab("price in $") + 
 scale_color_colorblind("clarity")
 
@@ -147,18 +152,26 @@ ggplot(diamonds, aes(x= clarity, y= carat, color=price)) +
   geom_point(alpha = 0.2) + theme_classic() +
   scale_color_viridis_c(option = "E", direction = -1)
   
+
+
+#also check out the turbo color palette!
+#https://docs.google.com/presentation/d/1Za8JHhvr2xD93V0bqfK--Y9GnWL1zUrtvxd_y9a2Wo8/edit?usp=sharing
+#https://blog.research.google/2019/08/turbo-improved-rainbow-colormap-for.html
+
 #Section 3: Non-visual representations ####
 #Braille package
-library(BrailleR)
-
 mybarplot <- ggplot(diamonds, aes(x = clarity)) + 
   geom_bar() +
   theme(axis.text.x = element_text(angle=70, vjust=0.5)) +
   theme_classic() + ggtitle("Number of Diamonds by Clarity")
+mybarplot
+
+library(BrailleR)
 
 VI(mybarplot)
 
 library(sonify)
+plot(iris$Petal.Width)
 sonify(iris$Petal.Width)
 
 detach("package:BrailleR", unload=TRUE)
