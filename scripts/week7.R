@@ -158,6 +158,10 @@ ggplot(diamonds, aes(x= clarity, y= carat, color=price)) +
 #https://docs.google.com/presentation/d/1Za8JHhvr2xD93V0bqfK--Y9GnWL1zUrtvxd_y9a2Wo8/edit?usp=sharing
 #https://blog.research.google/2019/08/turbo-improved-rainbow-colormap-for.html
 
+#to download it and use it in R, use this link
+#https://rdrr.io/github/jlmelville/vizier/man/turbo.html
+
+
 #Section 3: Non-visual representations ####
 #Braille package
 mybarplot <- ggplot(diamonds, aes(x = clarity)) + 
