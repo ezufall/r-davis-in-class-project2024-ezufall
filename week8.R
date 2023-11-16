@@ -318,3 +318,16 @@ table(months)
 months <- month(mloa2$datetime, label = TRUE, abbr=TRUE)
 table(months)
 
+#how to check for daylight savings time
+dst(mloa2$datetime_test[1])
+dst(mloa2$datetime)
+
+latime <- lubridate::ymd_hms("2016/04/05 4:47:21 PM", 
+                             tz="America/Los_Angeles") 
+latime
+dst(latime)
+gm <- with_tz(latime, tzone = "GMT")
+dst(gm) 
+hi <- with_tz(latime, tzone = "Pacific/Honolulu")
+dst(hi) 
+# --> 2016-04-05 16:47:21
