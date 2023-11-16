@@ -41,7 +41,8 @@ sample_dates_3
 
 
 #to fix this error, you need to specify the format like so:
-sample_dates_3<- as.Date(sample_dates_2, format = "%m-%d-%Y" ) # date code preceded by "%"
+sample_dates_3<- as.Date(sample_dates_2, format = "%m-%d-%Y" ) 
+# date code preceded by "%"
 
 sample_dates_3
 
@@ -179,13 +180,21 @@ lubridate::dmy("22051997")# --> 1997-05-22
 #of a single time variable
 
 lubridate::ymd_hm("2016-01-01 12:00", 
-                  tz="America/Los_Angeles")# --> 2016-01-01 12:00:00
+                  tz="America/Los_Angeles")
+# --> 2016-01-01 12:00:00
 #24 hour time:
 lubridate::ymd_hm("2016/04/05 14:47", 
-                  tz="America/Los_Angeles")# --> 2016-04-05 14:47:00
+                  tz="America/Los_Angeles")
+# --> 2016-04-05 14:47:00
+
 #converts 12 hour time into 24 hour time:
-lubridate::ymd_hms("2016/04/05 4:47:21 PM", 
-                   tz="America/Los_Angeles") # --> 2016-04-05 16:47:21
+latime <- lubridate::ymd_hms("2016/04/05 4:47:21 PM", 
+                   tz="America/Los_Angeles") 
+latime
+#how to change time zones
+with_tz(latime, tzone = "GMT")
+with_tz(latime, tzone = "Pacific/Honolulu")
+# --> 2016-04-05 16:47:21
 
 
 
@@ -231,8 +240,8 @@ glimpse(mloa2)
 # now we are ready to make a datetime col 
 #so that we can use lubridate on it:
 mloa2$datetime <- paste(mloa2$year, "-", mloa2$month,
-                        "-", mloa2$day, ", ", mloa2$hour24, ":",
-                        mloa2$min, sep = "")
+                  "-", mloa2$day, ", ", mloa2$hour24, ":",
+                   mloa2$min, sep = "")
 
 glimpse(mloa2)
 #since we used "paste," our new column is a character string type
@@ -261,7 +270,8 @@ glimpse(mloa2)
 #digits for each portion of the datetime 
 #(eg month could be "2" or "12")
 mloa2$datetime_test <- as_datetime(mloa2$datetime, 
-                        tz="America/Los_Angeles", format="%Y-%m-%d, %H:%M")
+                        tz="America/Los_Angeles", 
+                        format="%Y-%m-%d, %H:%M")
 #note: America/Los_Angeles is not actually 
 #the time zone that this data is from,
 #which is evident because when telling 
